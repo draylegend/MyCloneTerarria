@@ -21,10 +21,12 @@ public:
     explicit Player(const Transform& transform, TextureManager& textureManager);
     void init();
     void setTexture();
-    void update(InputManager& input, float dt);
+    void update(InputManager& input);
     void control(InputManager& input);
     void draw(sf::RenderWindow& window);
     const sf::Vector2f getPosition() const;
-    void setVelocityX(float velocityX);
-    void setVelocityY(float velocityY);
+    void setPosition(const sf::Vector2f pos);
+    void reduceVelocityX(double velocityX);
+    void reduceVelocityY(double velocityY);
+    const sf::Vector2f getVelocity() const;
 };

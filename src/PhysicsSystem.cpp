@@ -1,10 +1,16 @@
 #include <PhysicsSystem.h>
 #include <player.h>
 #include <Vector2.h>
+#include <iostream>
+#include <GameTime.h>
 
 
-PhysicsSystem::PhysicsSystem(Player& player) : player(player) {}
+void PhysicsSystem::update(Player& player) {
 
-void PhysicsSystem::update() {
-    //player.setVelocityY(-)
+    player.reduceVelocityX(friction);
+
+    //auto playerPos = player.getPosition();
+    //if (playerPos.y < 800) {
+    //    player.reduceVelocityY(gravity * GameTime::deltaTimeSeconds);
+    //}
 }
