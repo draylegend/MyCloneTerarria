@@ -1,101 +1,75 @@
 # MyCloneTerraria
 
-A Terraria-inspired 2D sandbox game built with C++, SFML, and Qt.
+A Terraria-inspired 2D game built with C++ and SFML 3.
 
-![Build Status](https://github.com/villa-version/MyCloneTerarria/workflows/Build/badge.svg)
+> SFML 3.0.2 is downloaded and compiled automatically on the first build — no manual installation needed.
 
-## Features
+## Windows
 
-- 2D sprite-based rendering
-- Player movement controls
-- Camera system that follows the player
-- Texture management system
-- Cross-platform support (Windows, Linux)
+**Requirements:** [Visual Studio 2017+](https://visualstudio.microsoft.com/) (with *Desktop development with C++* workload) or [MinGW-w64 7+](https://www.mingw-w64.org/), [CMake 3.11+](https://cmake.org/download/), [Git 2.0+](https://git-scm.com/)
 
-## Installation
-
-### Pre-built Binaries
-
-Download the latest release for your platform from the [Releases page](https://github.com/villa-version/MyCloneTerarria/releases).
-
-**Linux:**
-```bash
-tar -xzf MyCloneTerraria-linux-x64.tar.gz
-cd MyCloneTerraria
-./MyCloneTerraria
-```
-
-**Windows:**
-1. Extract `MyCloneTerraria-windows-x64.zip`
-2. Run `MyCloneTerraria.exe`
-
-### Building from Source
-
-#### Linux (Debian/Ubuntu)
-
-```bash
-# Install dependencies
-sudo apt-get update
-sudo apt-get install -y build-essential cmake qtbase5-dev libqt5widgets5 libsfml-dev
-
-# Build
-mkdir build && cd build
-cmake ..
-make
-
-# Run
-./MyCloneTerraria
-```
-
-#### Windows
-
-1. Install [Qt 5.15+](https://www.qt.io/download)
-2. Install [SFML 2.5+](https://www.sfml-dev.org/download.php)
-3. Build with CMake:
 ```cmd
-mkdir build
-cd build
-cmake .. -G "MinGW Makefiles"
-cmake --build .
-MyCloneTerraria.exe
+git clone https://github.com/villa-version/MyCloneTerarria.git
+cd MyCloneTerarria
+cmake -B build
+cmake --build build --config Release
+build\Release\MyCloneTerraria.exe
+```
+
+## Linux
+
+**Requirements:** GCC 7+ or Clang 5+, CMake 3.11+, Git 2.0+
+
+```bash
+# Arch
+pacman -S cmake base-devel git
+
+# Ubuntu / Debian
+apt install cmake build-essential git
+```
+
+```bash
+git clone https://github.com/villa-version/MyCloneTerarria.git
+cd MyCloneTerarria
+cmake -B build
+cmake --build build
+./build/MyCloneTerraria
+```
+
+## macOS
+
+**Requirements:** Xcode Command Line Tools (Clang 5+), CMake 3.11+, Git 2.0+
+
+```bash
+xcode-select --install
+brew install cmake git
+```
+
+```bash
+git clone https://github.com/villa-version/MyCloneTerarria.git
+cd MyCloneTerarria
+cmake -B build
+cmake --build build
+./build/MyCloneTerraria
 ```
 
 ## Controls
 
-- **A** - Move left
-- **D** - Move right
-- **Space** - Jump (planned)
+| Key | Action |
+|-----|--------|
+| A | Move left |
+| D | Move right |
+| W | Jump |
 
 ## Project Structure
 
 ```
 MyCloneTerraria/
-├── src/              # Source files
-├── headers/          # Header files
-├── assets/           # Game assets (textures, sounds)
-├── build/            # Build output (gitignored)
-└── CMakeLists.txt    # CMake configuration
+├── src/           # Source and header files (.cpp / .h)
+├── assets/        # Textures and sounds
+└── CMakeLists.txt # Build configuration
 ```
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
-
-## Development Roadmap
-
-- [ ] Physics system implementation
-- [ ] Collision detection
-- [ ] Jump mechanics
-- [ ] World generation and terrain
-- [ ] Block placement/destruction
-- [ ] Inventory system
-- [ ] Menu and UI
-- [ ] Multiplayer support
 
 ## License
 
-[Add your license here]
-
-## Credits
-
-Developed by the MyCloneTerraria team.
+[MIT](LICENSE)

@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.11)
 
 project(MyCloneTerraria LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
 
 # Добавляем исходники и заголовки
 set(SOURCES
@@ -22,41 +21,47 @@ set(SOURCES
 )
 
 set(HEADERS
-    headers/App.h
-	headers/config.h
-	headers/World.h
-	headers/player.h
-	headers/Vector2.h
-	headers/Background.h
-	headers/TextureManager.h
-	headers/Transform.h
-	headers/Camera.h
-	headers/InputManager.h
-	headers/PhysicsBody.h
-	headers/PhysicsSystem.h
-	headers/GameTime.h
+    src/App.h
+    src/config.h
+    src/World.h
+    src/player.h
+    src/Vector2.h
+    src/Background.h
+    src/TextureManager.h
+    src/Transform.h
+    src/Camera.h
+    src/InputManager.h
+    src/PhysicsBody.h
+    src/PhysicsSystem.h
+    src/GameTime.h
 )
 
 # Создаём исполняемый файл
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 # Добавляем include для заголовков
-target_include_directories(${PROJECT_NAME} PRIVATE headers)
+target_include_directories(${PROJECT_NAME} PRIVATE src)
 
-# Линкуем Qt
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets)
 
-# Set SFML directory for Windows, Linux will find it automatically
-if(WIN32)
-    set(SFML_DIR "D:/SFML-2.5.1/lib/cmake/SFML")
-endif()
+set(FETCHCONTENT_BASE_DIR "${CMAKE_SOURCE_DIR}/.deps" CACHE PATH "" FORCE)
 
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 3.0.2
+    GIT_SHALLOW ON
+)
+FetchContent_MakeAvailable(SFML)
 
 target_link_libraries(${PROJECT_NAME}
-    sfml-graphics
-    sfml-window
-    sfml-system
-	sfml-audio
+    SFML::Graphics
+    SFML::Window
+    SFML::System
+    SFML::Audio
+)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
 

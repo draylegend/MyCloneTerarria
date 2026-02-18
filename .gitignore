@@ -2,6 +2,7 @@
 build/
 cmake-build-*/
 out/
+.deps/
 
 # CMake
 CMakeCache.txt
@@ -61,10 +62,8 @@ MyCloneTerraria.exe
 
 # OS files
 Thumbs.db
-.DS_Store
 desktop.ini
 
 # Backup files
 *.bak
 *.backup
-*~
