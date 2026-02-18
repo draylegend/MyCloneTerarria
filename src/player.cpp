@@ -37,15 +37,22 @@ void Player::update(InputManager& input) {
 
     sprite.setPosition(transform.position.x, transform.position.y);
 
-    physics.acceleration.x = 0.f;
-    physics.acceleration.y = 0.f;
-
 }
 
 void Player::control(InputManager& input) {
-    if (input.left) {physics.acceleration.x = -1000;}
-    if (input.right) {physics.acceleration.x = 1000;}
-    if (input.jump) {physics.acceleration.y = -100;}
+    if (input.left) {
+        physics.acceleration.x = -1000;
+    }
+    else if (input.right) {
+        physics.acceleration.x = 1000;
+    } else {
+         physics.acceleration.x = 0;
+    }
+    if (input.jump) {
+        physics.acceleration.y = -100;
+    } else {
+         physics.acceleration.y = 0;
+    }
 }
 
 void Player::draw(sf::RenderWindow& window) {
@@ -62,14 +69,18 @@ void Player::setPosition(const sf::Vector2f newPos) {
     transform.position.x = newPos.y;
 }
 
-void Player::reduceVelocityX(double r) {
-    physics.velocity.x *= r;
+void Player::setVelocityX(double newVelX) {
+    physics.velocity.x = newVelX;
 }
 
-void Player::reduceVelocityY(double r) {
-    physics.velocity.y += r;
+void Player::setVelocityY(double newVelY) {
+    physics.velocity.y = newVelY;
 }
 
-const sf::Vector2f Player::getVelocity() const {
-    return sf::Vector2f(physics.velocity.x, physics.velocity.y);
+float Player::getVelocityX() const {
+    return physics.velocity.x;
+}
+
+float Player::getVelocityY() const {
+    return physics.velocity.y;
 }
